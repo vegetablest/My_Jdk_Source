@@ -39,6 +39,9 @@ public class BigDecimalTest {
         System.out.println("double类型的0.1----->" + bigDecimal5);
         BigDecimal bigDecimal6 = new BigDecimal("0.1");
         System.out.println("string类型的0.1----->" + bigDecimal6);
+        //小数点后55位和1位
+        System.out.println("输出bigDecimal5的位数："+bigDecimal5.scale());
+        System.out.println("输出bigDecimal6的位数："+bigDecimal6.scale());
         Double aDouble = Double.valueOf(0.1);
         System.out.println(aDouble);
         System.out.println(new BigDecimal(aDouble));
@@ -89,6 +92,8 @@ public class BigDecimalTest {
         System.out.println(formatToNumber(new BigDecimal("0.001")));
         System.out.println(formatToNumber(new BigDecimal("0.006")));
         System.out.println(formatToNumber(new BigDecimal("0.206")));
+
+
     }
     /**
      * @desc 1.0~1之间的BigDecimal小数，格式化后失去前面的0,则前面直接加上0。
