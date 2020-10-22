@@ -1,5 +1,7 @@
 package test.pojo;
 
+import java.util.List;
+import java.util.Map;
 import java.util.Objects;
 
 public class Person {
@@ -31,6 +33,9 @@ private int age;
         this.age = age;
     }
 
+    public void test(Map<String,String>map, List<String> list){
+
+    }
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
