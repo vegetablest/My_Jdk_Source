@@ -34,7 +34,7 @@ public class TestStream01 {
         //stream处理,过滤元素d
         list.add("d");
         System.out.println("过滤之前的："+list);
-       List list1 = (ArrayList<String>) list.stream().filter(str -> ! "d".equals(str) ).collect(Collectors.toList());
+        List list1 = (ArrayList<String>) list.stream().filter(str -> ! "d".equals(str) ).collect(Collectors.toList());
         System.out.println("过滤之后的："+list1);
     }
 }

@@ -49,6 +49,8 @@ public class TestLambda01 {
         new Thread(()-> System.out.println("hello"),"线程A");
         //自己写接口调用实现
 
+
+
     }
 
 }

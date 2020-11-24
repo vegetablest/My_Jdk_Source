@@ -1,5 +1,11 @@
 package test.newfeatures;
 
+import javax.crypto.spec.OAEPParameterSpec;
+import javax.swing.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+
 public class TestLambda02 {
     public static void main(String[] args) {
         Foo foo = new Foo() {
@@ -9,26 +15,46 @@ public class TestLambda02 {
             }
         };
         foo.sayHello();
-        System.out.println(foo.add(1,2));
+        System.out.println(foo.add(1, 2));
         System.out.println(Foo.asd(5, 3));
         //lambda表达式只能用一个方法的接口，即函数式接口@FunctionalInterface
         //拷贝小括号，写死右箭头，落地大括号
-        Foo foo1 = () -> {System.out.println("hello lambda");};
+        Foo foo1 = () -> {
+            System.out.println("hello lambda");
+        };
         foo1.sayHello();
         Foo foo2 = () -> System.out.println("hello !!!");
         foo2.sayHello();
+
+        List<String> list = new ArrayList<String>() {
+            {
+                add("haha");
+                add("hehe");
+                add("wuwu");
+                add("huhu");
+            }
+        };
+        list.forEach(k -> System.out.println("value:"+k));
+
+    }
+    public static String doFormat(String par){
+        return "name"+ par;
     }
 }
+
 //@FunctionalInterface注解，隐式注解，一个方法的接口底层默认有
-interface  Foo{
+interface Foo {
     public void sayHello();
 
     //1.8接口新特性，加默认方法，可写多个,定义加实现
-    public default  int add(int x,int y){
-        return x+y;
-    };
+    public default int add(int x, int y) {
+        return x + y;
+    }
+
+    ;
+
     //静态方法,可定义接口
-    public static int asd(int x,int y){
-        return x*y;
+    public static int asd(int x, int y) {
+        return x * y;
     }
 }
