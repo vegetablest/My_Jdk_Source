@@ -1,9 +1,5 @@
 package test.newfeatures;
 
-import org.omg.Messaging.SyncScopeHelper;
-import org.omg.PortableServer.THREAD_POLICY_ID;
-
-import java.util.Date;
 
 public class SimpleLamdba {
     public static void main(String[] args) {
