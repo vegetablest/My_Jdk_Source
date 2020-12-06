@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace,绑定具体的mapper类-->
+<mapper namespace="com.bsfit.suaf.mapper.ActorMapper">
+    <!--id是对应的方法，resultType输出结果类型，集合填泛型-->
+    <select id="getActor" resultType="com.bsfit.suaf.pojo.Actor">
+        select * from Actor;
+  </select>
+    <!--id是对应的方法，resultType输出结果类型，集合填泛型,parameterType入参类型-->
+    <select id="getAct" resultType="com.bsfit.suaf.pojo.Actor" parameterType="Integer">
+        select * from Actor where actor_Id = #{id};
+  </select>
+    <!--insert时传入参数是对象，要一一对应，如果成员变量过多，那么会很麻烦，-->
+    <insert id="addActor" parameterType="com.bsfit.suaf.pojo.Actor" keyProperty="actor_id">
+        insert into actor(actor_Id,first_name,last_name,last_update)values (#{actorId},#{firstName},#{lastName},#{lastUpdate});
+    </insert>
+    <!--参数用map解决上述说的很麻烦问题,传入map的key-->
+    <insert id="addActorSimple" parameterType="map">
+        insert into actor(actor_Id,first_name,last_name,last_update) values (#{id},#{nameOne},#{nameTwo},#{time});
+    </insert>
+
+    <delete id="delActor" parameterType="Integer">
+        delete from actor where actor_id = #{id}
+    </delete>
+
+    <update id="updateActor" parameterType="com.bsfit.suaf.pojo.Actor">
+        update actor set last_name = #{lastName} where actor_id = #{actorId}
+    </update>
+
+
+</mapper>
