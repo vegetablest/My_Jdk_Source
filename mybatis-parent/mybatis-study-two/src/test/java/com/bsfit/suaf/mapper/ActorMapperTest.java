@@ -2,7 +2,6 @@ package com.bsfit.suaf.mapper;
 
 import com.bsfit.suaf.pojo.Actor;
 import com.bsfit.suaf.utils.MySqlSessionUtil;
-import com.bsfit.suaf.utils.SqlSessionUtils;
 import org.apache.ibatis.session.SqlSession;
 import org.junit.Test;
 
@@ -14,28 +13,18 @@ public class ActorMapperTest {
 
     @Test
     public void getActorsTest() {
-        try {
-            SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+            SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
             ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
             List<Actor> actorList = actorMapper.getActor();
             actorList.forEach(actor -> System.out.println(actor));
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-        }
     }
 
     @Test
     public void getActTest() {
-        try {
-            SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+            SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
             ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
             Actor actor = actorMapper.getAct(1);
             System.out.println(actor);
-        } catch (IOException e) {
-            e.printStackTrace();
-        } finally {
-        }
     }
 
     /**
@@ -43,9 +32,9 @@ public class ActorMapperTest {
      */
     @Test
     public void addActorTest() throws IOException {
-        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
         ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
-        actorMapper.addActor(new Actor(205, "zhang", "san", new Date()));
+        actorMapper.addActor(new Actor(202, "zhang", "san", new Date()));
         sqlSession.commit();
     }
     @Test
@@ -63,28 +52,28 @@ public class ActorMapperTest {
     }
     @Test
     public void updateActorTest() throws IOException {
-        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
         ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
         actorMapper.updateActor(new Actor(201, "li", "si", new Date()));
         sqlSession.commit();
     }
     @Test
     public void delActorTest() throws IOException {
-        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
         ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
         actorMapper.delActor(201);
         sqlSession.commit();
     }
     @Test
     public void getActorLikeTest() throws IOException {
-        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
         ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
         List<Actor> actorLike = actorMapper.getActorLike("%OO%");
         actorLike.forEach(actor -> System.out.println(actor));
     }
     @Test
     public void getActorLike2Test() throws IOException {
-        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
         ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
         List<Actor> actorLike = actorMapper.getActorLike2("OO");
         actorLike.forEach(actor -> System.out.println(actor));
@@ -92,7 +81,7 @@ public class ActorMapperTest {
 
     @Test
     public void addActorsTest() throws IOException {
-        SqlSession sqlSession = SqlSessionUtils.getSqlSession();
+        SqlSession sqlSession = MySqlSessionUtil.getSqlSession();
         ActorMapper actorMapper = sqlSession.getMapper(ActorMapper.class);
         List<Actor> actors = new ArrayList<Actor>(){{
             add((new Actor(202, "zhang", "san", new Date())));

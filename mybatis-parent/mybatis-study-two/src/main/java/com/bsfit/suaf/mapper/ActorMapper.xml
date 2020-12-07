@@ -29,12 +29,11 @@
         update actor set last_name = #{lastName} where actor_id = #{actorId}
     </update>
     <!--1.%%最好写到代码里，在这里容易发送SQL注入问题2.写在这里，反正不要给别人写?的几会-->
-    <select id="getActorLike" resultType="com.bsfit.suaf.pojo.Actor" parameterType="String">
+    <select id="getActorLike" resultType="com.bsfit.suaf.pojo.Actor">
         select * from actor where last_name like #{name}
     </select>
-
-    <select id="getActorLike2" resultType="com.bsfit.suaf.pojo.Actor">
-        select * from actor where last_name like "%"#{name}"%"
+    <select id="getActorLike2" resultType="Actor">
+        select * from actor where last_name like "%" #{name} "%"
     </select>
 
 </mapper>
