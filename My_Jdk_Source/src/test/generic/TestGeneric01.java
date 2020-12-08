@@ -36,9 +36,7 @@ public class TestGeneric01 {
             add(12);
             add(new Person("zhangsna",23));
         }};
-        /**
-         * 返回Object类型
-         * */
+        /* 返回Object类型 */
         Object o = arrayList.get(1);
         arrayList.forEach(a -> System.out.println(a));
 
@@ -52,7 +50,5 @@ public class TestGeneric01 {
 //        arrayList1.add(new Person());
         /*会直接返回string类型*/
         String s = arrayList1.get(1);
-
-
     }
 }

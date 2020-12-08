@@ -219,31 +219,20 @@ import java.util.Arrays;
  */
 public class BigDecimal extends Number implements Comparable<BigDecimal> {
     /**
-     * The unscaled value of this BigDecimal, as returned by {@link
-     * #unscaledValue}.
      *
-     * @serial
-     * @see #unscaledValue
      */
     private final BigInteger intVal;
 
     /**
      * The scale of this BigDecimal, as returned by {@link #scale}.
-     *
-     * @serial
-     * @see #scale
+     * 返回此小数的位数
      */
     private final int scale;  // Note: this may have any value, so
                               // calculations must be done in longs
 
     /**
-     * The number of decimal digits in this BigDecimal, or 0 if the
-     * number of digits are not known (lookaside information).  If
-     * nonzero, the value is guaranteed correct.  Use the precision()
-     * method to obtain and set the value if it might be 0.  This
-     * field is mutable until set nonzero.
-     *
-     * @since  1.5
+     *如果小数点后没有位数，可用他获取，为0
+     *  @since  1.5
      */
     private transient int precision;
 
