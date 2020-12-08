@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--namespace,绑定具体的mapper类-->
+<mapper namespace="com.bsfit.suaf.mapper.ActorChangeMapper">
+    <!--id是对应的方法，resultType输出结果类型，集合填泛型-->
+    <!--数据库的列与类属性对不上-->
+    <select id="getActorChanges" resultType="ActorChange">
+        select * from Actor;
+  </select>
+    <!--映射不上，写个resultMap手动映射，或者起别名,别名-->
+    <select id="getActorChange" resultType="ActorChange">
+        select actor_id as customerId,first_name,last_name,last_update from Actor where actor_Id = #{id};
+  </select>
+    <!--映射不上，写个resultMap进行结果集映射映射-->
+    <resultMap id="ActorToMap" type="ActorChange">
+        <!--列to属性,简单映射-->
+        <result column="actor_Id" property="customerId"/>
+    </resultMap>
+    <select id="getActorChan" resultMap="ActorToMap">
+        select * from Actor where actor_Id = #{id};
+  </select>
+    <!--分页查询-->
+    <select id="getActorByLimit" parameterType="map" resultMap="ActorToMap">
+        select * from Actor limit #{startIndex},#{endIndex};
+  </select>
+    <!--分页查询2-->
+    <select id="getActorByRowBouds" resultMap="ActorToMap">
+        select * from Actor;
+  </select>
+</mapper>

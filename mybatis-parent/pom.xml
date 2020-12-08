@@ -11,6 +11,7 @@
     <modules>
         <module>mybatis-study-one</module>
         <module>mybatis-study-two</module>
+        <module>mybatis-study-three</module>
     </modules>
 
     <dependencies>
