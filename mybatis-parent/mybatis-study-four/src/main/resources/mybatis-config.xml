@@ -4,12 +4,26 @@
         "http://mybatis.org/dtd/mybatis-3-config.dtd">
 <!--mybatis核心配置文件，名字随便起-->
 <configuration>
-    <!--开启驼峰命名-->
+    <!--引入外部配置文件,resource下不用再写文件位置了-->
+    <properties resource="db.properties">
+        <!--这里还能加，但是与外部冲突的时候外部的优先级更高-->
+    </properties>
+
     <settings>
+        <!--开启驼峰命名-->
         <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启日志，能选的很多去官网查查看，SLF4J | LOG4J常用 | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING标准 | NO_LOGGING-->
+        <setting name="logImpl" value="LOG4J"/>
         <!--显示开启二级全局缓存-->
         <setting name="cacheEnabled" value="true"/>
     </settings>
+
+    <typeAliases>
+        <!--设置别名,给一个类一个类设置-->
+        <!--扫描包，给别名，默认首字母大写，第一种能够自定义别名，这种不行-->
+        <!--还想使用自定义别名，还行用包扫描，直接pojo上给注解也行@Alias-->
+        <package name="com.bsfit.suaf.pojo"/>
+    </typeAliases>
     <!--默认环境-->
     <environments default="development">
         <!--环境标签-->
@@ -20,18 +34,17 @@
             <!--数据源，POOLED,UNPOOLED,一个有池子，一个没有-->
             <dataSource type="POOLED">
                 <!--配置,通过该属性使用引用的文件，能够在外部动态的替换-->
-                <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <property name="url"
-                          value="jdbc:mysql://127.0.0.1:3306/sakila?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
-                <property name="username" value="root"/>
-                <property name="password" value="root"/>
+                <property name="driver" value="${driver}"/>
+                <property name="url" value="${url}"/>
+                <property name="username" value="${username}"/>
+                <property name="password" value="${password}"/>
             </dataSource>
         </environment>
+
         <environment id="test">
             <transactionManager type="JDBC"/>
             <dataSource type="POOLED">
                 <property name="driver" value="com.mysql.cj.jdbc.Driver"/>
-                <!--要转义&符号-->
                 <property name="url"
                           value="jdbc:mysql://127.0.0.1:3306/sakila?useUnicode=true&amp;useJDBCCompliantTimezoneShift=true&amp;useLegacyDatetimeCode=false&amp;serverTimezone=UTC"/>
                 <property name="username" value="root"/>
@@ -41,7 +54,9 @@
     </environments>
     <!--映射-->
     <mappers>
-        <!--扫描具体的xml-->
-        <mapper resource="com/bsfit/suaf/mapper/ActorMapper.xml"/>
+        <!--扫描具体的xml，放哪都行，都能找到-->
+        <mapper class="com.bsfit.suaf.mapper.TeacherMapper"/>
+        <mapper class="com.bsfit.suaf.mapper.StudentMapper"/>
+        <mapper class="com.bsfit.suaf.mapper.BlogMapper"/>
     </mappers>
 </configuration>

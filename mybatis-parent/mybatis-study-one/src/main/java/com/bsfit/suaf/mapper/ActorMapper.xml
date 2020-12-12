@@ -4,6 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!--namespace,绑定具体的mapper类-->
 <mapper namespace="com.bsfit.suaf.mapper.ActorMapper">
+    <!--默认是一级缓存，并且关不掉的，现在使用下边标签就是开启二级缓存了，一级缓存关闭后才能放到二级缓存，但是能够定义一些功能，用缓存的pojo需要序列化-->
+    <!--FIFO先进先出，50000毫秒刷新一次，最长512，只读，先在setting中配置开启，在这里具体配置-->
+    <!--以及缓存只在一次sqlsession中，从开始到close，中间的增删改都会刷新缓存，同样使用clearcache能清空缓存-->
+    <cache
+        eviction="FIFO"
+        flushInterval="50000"
+        size="512"
+        readOnly="true"
+    />
     <!--id是对应的方法，resultType输出结果类型，集合填泛型-->
     <select id="getActor" resultType="com.bsfit.suaf.pojo.Actor">
         select * from Actor;

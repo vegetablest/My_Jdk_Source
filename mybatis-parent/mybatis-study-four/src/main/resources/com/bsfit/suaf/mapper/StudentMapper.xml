@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!--mybatis核心配置文件，名字随便起-->
+<mapper namespace="com.bsfit.suaf.mapper.StudentMapper">
+
+<!--    <select id="getStudents" resultType="student">-->
+<!--        select * from student;-->
+<!--    </select>-->
+
+    <!--嵌套查询处理-->
+    <select id="getStudents" resultMap="studentteacher">
+        select * from student;
+    </select>
+
+    <resultMap id="studentteacher" type="Student">
+        <result property="id" column="id"/>
+        <result property="name" column="name"/>
+        <!--复杂处理，如果是对象就用association-->
+        <association property="teacher" column="tid" javaType="Teacher" select="getTeacher"/>
+        <!--复杂处理，如果是集合就用collection-->
+<!--        <collection property="teacher" column=""/>-->
+    </resultMap>
+
+    <select id="getTeacher" resultType="Teacher">
+        select * from teacher where id = #{id};<!--这仅仅是占位，因为是单表-->
+    </select>
+
+
+
+    <!---->
+    <select id="getStudents2" resultMap="studentteacher2">
+        select s.id sid,s.name sname,t.name tname,t.id tid from student s,teacher t where s.tid = t.id;
+    </select>
+
+    <resultMap id="studentteacher2" type="Student">
+        <result property="id" column="sid"/>
+        <result property="name" column="sname"/>
+        <association property="teacher" javaType="Teacher">
+            <result property="name" column="tname"/>
+            <result property="id" column="tid"/>
+        </association>
+    </resultMap>
+
+</mapper>

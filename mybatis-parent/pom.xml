@@ -12,6 +12,7 @@
         <module>mybatis-study-one</module>
         <module>mybatis-study-two</module>
         <module>mybatis-study-three</module>
+        <module>mybatis-study-four</module>
     </modules>
 
     <dependencies>
