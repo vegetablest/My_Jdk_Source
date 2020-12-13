@@ -13,5 +13,74 @@
             size="512"
             readOnly="true"
     />
+    <!--动态SQL之if，if标签 test必写,这里写where1=1是为了不满足条件时输出所有，且不用在if里边加where-->
+    <select id="getBlogIfId" parameterType="map" resultType="Blog">
+        select * from blog where 1=1
+        <if test="title != null">
+            and title = #{title}
+        </if>
+        <if test="author != null">
+            and author = #{author}
+        </if>
+    </select>
+
+    <!--where标签把第一个满足条件的加上where，去掉and-->
+    <select id="getBlogIfId1" parameterType="map" resultType="Blog">
+        select * from blog
+        <where>
+            <if test="title != null">
+                and title = #{title}
+            </if>
+            <if test="author != null">
+                and author = #{author}
+            </if>
+        </where>
+        <!--定制化where标签前后去掉什么-->
+<!--        <trim prefix="" prefixOverrides="" suffix="" suffixOverrides="">-->
+<!--            -->
+<!--        </trim>-->
+
+    </select>
+    <!--动态SQL之choose，choose标签 像Java的switch-->
+    <select id="getBlogChoose" parameterType="map" resultType="Blog">
+        select * from blog
+        <where>
+            <choose>
+                <when test="title != null">
+                    and title = #{title}
+                </when>
+                <when test="author != null">
+                    and author = #{author}
+                </when>
+                <otherwise>
+                    and views = #{views}
+                </otherwise>
+            </choose>
+        </where>
+    </select>
+    <!--动态SQL之choose，set 用于update，会自动去，-->
+    <update id="getBlogSet" parameterType="map" >
+        update blog
+        <set>
+            <if test="title != null">
+                title = #{title},
+            </if>
+            <if test="author != null">
+                author = #{author},
+            </if>
+        </set>
+        where id = #{id}
+    </update>
+    <!--fore  用于in-->
+    <select id="getBlogFore" parameterType="map" resultType="Blog">
+        select * from blog
+        <where>
+            id in
+            -- 迭代出来的是id   传入的是map,里边有个ids 以，分割，开头结尾是()
+            <foreach item="id" index="index" collection="ids" open="(" close=")" separator=",">
+                #{id}
+            </foreach>
+        </where>
+    </select>
 
 </mapper>
