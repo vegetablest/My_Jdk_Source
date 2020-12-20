@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+    <!--bean的作用域 singleton单例，prototype多例，request，session-->
+    <bean id="helloWorld" class="com.bsfit.suaf.pojo.HelloWorld" scope="singleton">
+        <property name="str" value="suaf"/>
+    </bean>
+    <!--默认是使用无参构造器来创建的-->
+    <bean id="user" class="com.bsfit.suaf.pojo.UserT" scope="singleton">
+        <property name="name" value="spring"/>
+    </bean>
+    <!--默认是使用无参构造器来创建的，现在使用有参构造生成，使用参数name或者使用参数下标-->
+    <bean id="user1" class="com.bsfit.suaf.pojo.UserT" scope="singleton">
+        <constructor-arg name="name" value="有参构造生成"/>
+    </bean>
+    <!--默认是使用无参构造器来创建的，现在使用有参构造生成，使用参数name或者使用参数下标或者通过参数类型-->
+    <bean id="user2" class="com.bsfit.suaf.pojo.UserT" scope="singleton">
+        <constructor-arg index="0" value="下标构建"/>
+    </bean>
+    <!--默认是使用无参构造器来创建的，现在使用有参构造生成，使用参数name或者使用参数下标或者使用参数类型，不建议使用参数类型来-->
+    <bean id="user3" class="com.bsfit.suaf.pojo.UserT" scope="singleton">
+        <constructor-arg type="java.lang.String" value="参数类型来"/>
+    </bean>
+
+    <!--别名使用-->
+    <!--通过别名能够get到该实例-->
+    <bean id="userT" class="com.bsfit.suaf.pojo.UserT" scope="singleton">
+        <constructor-arg name="name" value="有参构造"/>
+    </bean>
+    <alias name="userT" alias="newUserT"/>
+    <!--别名的使用2-->
+    <bean id="userT2" class="com.bsfit.suaf.pojo.UserT" scope="singleton" name="t"/>
+
+    <!--import使用，一般用于团队开发，能够让多个配置文件导入到一个里边-->
+
+</beans>

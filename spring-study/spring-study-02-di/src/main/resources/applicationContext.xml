@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <import resource="beans.xml"/>
+    <import resource="beans2.xml"/>
+    <beans>
+
+        <!--导入支持注解的约束,并开启注解-->
+        <context:annotation-config/>
+
+        <bean id="address" class="com.bsfit.suaf.pojo.Address">
+            <property name="address" value="杭州"/>
+        </bean>
+        <!--基本数据类型和对象的注入-->
+        <bean id="student" class="com.bsfit.suaf.pojo.Student">
+            <property name="name" value="张三"/>
+            <property name="address" ref="address"/>
+        </bean>
+        <!--集合及复杂类型的注入-->
+        <bean id="student2" class="com.bsfit.suaf.pojo.Student">
+            <property name="name" value="张三"/>
+            <property name="address" ref="address"/>
+            <!--数组注入-->
+            <property name="bookes">
+                <array>
+                    <value>西游记</value>
+                    <value>水浒传</value>
+                    <value>红楼梦</value>
+                </array>
+            </property>
+            <!--list注入-->
+            <property name="hobbys">
+                <list>
+                    <value>打游戏</value>
+                    <value>打篮球</value>
+                    <value>撸代码</value>
+                </list>
+            </property>
+            <!--set-->
+            <property name="games">
+                <set>
+                    <value>lol</value>
+                    <value>ooo</value>
+                    <value>olo</value>
+                </set>
+            </property>
+            <!--map-->
+            <property name="card">
+                <map>
+                    <entry key="key" value="value"/>
+                    <entry key="key1" value="value1"/>
+                </map>
+            </property>
+            <!--properties-->
+            <property name="info">
+                <props>
+                    <prop key="prokey">provalue</prop>
+                </props>
+            </property>
+            <!--空值注入1.2-->
+            <property name="empty" value=""/>
+            <property name="empty1">
+                <null/>
+            </property>
+        </bean>
+
+        <!--还能使用P命名空间和C命名空间，需要在上边先导入XML约束，P命名空间是使用的Set方法,C是使用构造方法-->
+        <!--P命名空间,使用之后发现set方法高亮了，显然是被调用了-->
+        <bean id="userP" class="com.bsfit.suaf.pojo.User" p:name="P命名空间" p:age="23"/>
+        <!--C命名空间,没有构造方法会报错，构造方法有几个形参会显示几个参数-->
+        <bean id="userC" class="com.bsfit.suaf.pojo.User" c:name="C命名空间" c:age="23"/>
+
+
+        <!--单例多例测试-->
+        <bean id="userSin" class="com.bsfit.suaf.pojo.User" scope="singleton"/>
+        <bean id="userPro" class="com.bsfit.suaf.pojo.User" scope="prototype"/>
+
+        <!--手动装配-->
+        <bean id="cat" class="com.bsfit.suaf.pojo.Cat"/>
+        <bean id="dog" class="com.bsfit.suaf.pojo.Dog"/>
+        <bean id="people" class="com.bsfit.suaf.pojo.People">
+            <property name="name" value="zhangsna"/>
+            <property name="cat" ref="cat"/>
+            <property name="dog" ref="dog"/>
+        </bean>
+
+        <!--自动装配,会去上下文中找set属性相同的对应自动装配进去，bean的ID要全局唯一，name要相同-->
+        <bean id="people2" class="com.bsfit.suaf.pojo.People" autowire="byName"/>
+        <!--自动装配,会去上下文中找set类型的对应自动装配进去，但是class要全局唯一-->
+        <bean id="people3" class="com.bsfit.suaf.pojo.People" autowire="byType"/>
+
+    </beans>
+</beans>
