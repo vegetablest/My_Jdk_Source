@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:p="http://www.springframework.org/schema/p"
+       xmlns:c="http://www.springframework.org/schema/c"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+                           http://www.springframework.org/schema/beans/spring-beans.xsd
+                           http://www.springframework.org/schema/context
+                           http://www.springframework.org/schema/context/spring-context.xsd
+                           http://www.springframework.org/schema/aop
+                           http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <!--开启注解-->
+    <context:annotation-config></context:annotation-config>
+    <!--注册bean-->
+    <bean id="userService" class="com.bsfit.suaf.staticproxy.UserServiceImpl"/>
+    <bean id="beforeLog" class="com.bsfit.suaf.log.BeforeLog"/>
+    <bean id="afterLog" class="com.bsfit.suaf.log.AfterLog"/>
+
+    <!--引入AOP的头文件，使用aop-->
+<!--    <aop:config>
+        &lt;!&ndash;需要一个切入点，expression表达式，写死的，execution(要执行的位置)&ndash;&gt;
+        <aop:pointcut id="point" expression="execution(* com.bsfit.suaf.staticproxy.UserServiceImpl.*(..))"/>
+        &lt;!&ndash;执行环绕增强  用哪个类，在那个点进行切入&ndash;&gt;
+        <aop:advisor advice-ref="afterLog" pointcut-ref="point"/>
+        <aop:advisor advice-ref="beforeLog" pointcut-ref="point"/>
+    </aop:config>-->
+
+    <!--方法二-->
+    <bean id="diy" class="com.bsfit.suaf.log.DiyPointCut"/>
+<!--    <aop:config>
+        <aop:aspect ref="diy">
+            &lt;!&ndash;切入点&ndash;&gt;
+            <aop:pointcut id="point" expression="execution(* com.bsfit.suaf.staticproxy.UserServiceImpl.*(..))"/>
+            &lt;!&ndash;通知&ndash;&gt;
+            <aop:before method="before" pointcut-ref="point"/>
+            <aop:after method="after" pointcut-ref="point"/>
+        </aop:aspect>
+    </aop:config>-->
+
+    <!--开启注解AOP-->
+    <bean id="annoDiyPointCut" class="com.bsfit.suaf.log.AnnoDiyPointCut"/>
+    <!--proxy-target-class="true"使用cglib动态代理，默认是使用jdk去动态代理-->
+    <aop:aspectj-autoproxy proxy-target-class="true"/>
+</beans>

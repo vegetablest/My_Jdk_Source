@@ -11,6 +11,9 @@
     <modules>
         <module>spring-study-01-ioc</module>
         <module>spring-study-02-di</module>
+        <module>spring-study-03-anno</module>
+        <module>spring-study-04-proxy</module>
+        <module>spring-study-05-mybatis</module>
     </modules>
 
     <dependencies>
@@ -39,6 +42,12 @@
             <groupId>org.projectlombok</groupId>
             <artifactId>lombok</artifactId>
             <version>1.18.12</version>
+        </dependency>
+        <!--AOP依赖织入包-->
+        <dependency>
+            <groupId>org.aspectj</groupId>
+            <artifactId>aspectjweaver</artifactId>
+            <version>1.9.5</version>
         </dependency>
     </dependencies>
 

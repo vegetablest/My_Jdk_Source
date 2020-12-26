@@ -26,3 +26,27 @@
                            http://www.springframework.org/schema/aop/spring-aop.xsd">
 </beans>
 ```
+```java
+/**
+ * @Component
+   @Repository
+   @Service
+   @Controller
+ */
+```
+
+```java
+//静态代理与动态代理
+/**
+* 动态代理和静态代理角色一样，都是代理接口
+* 动态代理的代理类是动态生成的，不是我们直接写好的!
+* 动态代理分为两大类:基于接口的动态代理，基于类的动态代理
+* 基于接口---JDK动态代理
+* 基于类: cglib
+* java字节码实现: javasist
+* 
+* 动态代理
+* InvocationHandler接口，invoke方法获取执行动态代理的程序
+* Proxy类，获取动态代理的对象
+*/
+```

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<!--mybatis核心配置文件，名字随便起-->
+<configuration>
+    <!--引入外部配置文件,resource下不用再写文件位置了-->
+    <properties resource="db.properties">
+        <!--这里还能加，但是与外部冲突的时候外部的优先级更高-->
+    </properties>
+
+    <settings>
+        <!--开启驼峰命名-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+        <!--开启日志，能选的很多去官网查查看，SLF4J | LOG4J常用 | LOG4J2 | JDK_LOGGING | COMMONS_LOGGING | STDOUT_LOGGING标准 | NO_LOGGING-->
+        <setting name="logImpl" value="LOG4J"/>
+        <!--显示开启二级全局缓存-->
+        <setting name="cacheEnabled" value="true"/>
+    </settings>
+
+    <typeAliases>
+        <!--设置别名,给一个类一个类设置-->
+        <!--扫描包，给别名，默认首字母大写，第一种能够自定义别名，这种不行-->
+        <!--还想使用自定义别名，还行用包扫描，直接pojo上给注解也行@Alias-->
+        <package name="com.bsfit.suaf.pojo"/>
+    </typeAliases>
+    <!--映射-->
+    <mappers>
+        <!--扫描具体的xml，放哪都行，都能找到-->
+        <mapper class="com.bsfit.suaf.mapper.UserMapper"/>
+    </mappers>
+</configuration>
