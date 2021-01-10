@@ -3,7 +3,7 @@ package test.multithreading;
 import java.util.concurrent.*;
 
 /**
- * 线程池的体系结构，Executor--->ExecutorService--->.....
+ * 线程池的体系结构，Executor--->ExecutorService--->.....ThreadPoolExecutor等
  *
  *
  * public ThreadPoolExecutor(
@@ -21,6 +21,8 @@ import java.util.concurrent.*;
         ThreadPoolExecutor.CallerRunsPolicy() 不抛异常，找人处理
         ThreadPoolExecutor.DiscardPolicy()  丢弃任务后加进来的任务
         ThreadPoolExecutor.DiscardOldestPolicy()  丢弃之前的任务
+
+        注：main线程和worker线程是主方法不会结束，只有线程池在守护线程中执行才会结束
  * @author bangsun
  */
 public class ExecutorStudy {
@@ -34,7 +36,7 @@ public class ExecutorStudy {
                 5,
                 10,
                 TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(10),
+                new ArrayBlockingQueue<>(20),
                 new ThreadPoolExecutor.AbortPolicy());
         for (int i = 1; i <= 20; i++) {
             try {
@@ -46,6 +48,7 @@ public class ExecutorStudy {
                 System.out.println("丢弃任务"+i);
             }
         }
+        System.out.println("fa");
         //线程池的Executor接口的子类ExecutorService接口一般常用ThreadPoolExecutor
     }
 }
