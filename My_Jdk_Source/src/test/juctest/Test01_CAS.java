@@ -1,6 +1,7 @@
 package test.juctest;
 import java.util.Arrays;
 import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.locks.AbstractQueuedSynchronizer;
 
 public class Test01_CAS {
     private static volatile int m = 0;
