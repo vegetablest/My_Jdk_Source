@@ -3,10 +3,10 @@
        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-    <import resource="beans.xml"/>
-    <import resource="beans2.xml"/>
-    <import resource="beans3.xml"/>
-    <beans>
-
-    </beans>
+    <bean class="com.bsfit.suaf.pojo.A" id="a" >
+        <property name="b" ref="b"/>
+    </bean>
+    <bean class="com.bsfit.suaf.pojo.B" id="b" >
+        <property name="a" ref="a"/>
+    </bean>
 </beans>

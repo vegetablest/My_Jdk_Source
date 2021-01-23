@@ -19,6 +19,8 @@ public class ProxyClient {
         proxyInvocationHandler.setTarget(userService);
         //生产动态代理类的接口
         UserService proxy = (UserService) proxyInvocationHandler.getProxy();
+        //jdk创建的动态代理对象proxy:com.sun.proxy.$Proxy0
+        System.out.println("proxy:"+proxy.getClass().getName());
         //执行方法
         proxy.add();
         proxy.delete();
