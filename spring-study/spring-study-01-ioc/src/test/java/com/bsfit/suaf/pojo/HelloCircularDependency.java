@@ -9,7 +9,7 @@ public class HelloCircularDependency {
     @Test
     public void testDependency(){
         //获取spring的上下文对对象
-        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("applicationContext.xml");
+        ApplicationContext applicationContext = new ClassPathXmlApplicationContext("beans3.xml");
         //对象交给spring的上下文管理了
         A a =  applicationContext.getBean("a",A.class);
         B b =  applicationContext.getBean("b",B.class);
