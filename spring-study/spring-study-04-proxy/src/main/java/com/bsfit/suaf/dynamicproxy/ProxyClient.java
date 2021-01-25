@@ -7,10 +7,7 @@ import com.bsfit.suaf.staticproxy.UserServiceImpl;
  * @author bangsun
  */
 public class ProxyClient {
-
-
     public static void main(String[] args) {
-
         //目标对象
         UserServiceImpl userService = new UserServiceImpl();
         //代理角色，不存在
@@ -26,6 +23,5 @@ public class ProxyClient {
         proxy.delete();
         proxy.update();
         proxy.query();
-
     }
 }
