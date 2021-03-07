@@ -30,14 +30,15 @@ public class ExecutorStudy {
     Executor executor;
     ExecutorService executorService;
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws InterruptedException {
         ExecutorService executorService = new ThreadPoolExecutor(
                 2,
                 5,
                 10,
                 TimeUnit.SECONDS,
-                new ArrayBlockingQueue<>(20),
+                new ArrayBlockingQueue<>(10),
                 new ThreadPoolExecutor.AbortPolicy());
+
         for (int i = 1; i <= 20; i++) {
             try {
                 executorService.execute(new Thread(()-> {
@@ -48,7 +49,11 @@ public class ExecutorStudy {
                 System.out.println("丢弃任务"+i);
             }
         }
+//        executorService.awaitTermination(5,TimeUnit.SECONDS); //等待多久后关闭
+        ((ThreadPoolExecutor) executorService).allowCoreThreadTimeOut(true);//是否关闭线程池
         System.out.println("fa");
+//        executorService.shutdown();    //执行完所有线程之后关闭
+//        executorService.shutdownNow(); //立刻关闭
         //线程池的Executor接口的子类ExecutorService接口一般常用ThreadPoolExecutor
     }
 }

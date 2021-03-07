@@ -161,6 +161,7 @@ public class HashSet<E>
      * @param e element to be added to this set
      * @return <tt>true</tt> if this set did not already contain the specified
      * element
+     * add方法就算调用hashmap的put方法只不过value是一个常量
      */
     public boolean add(E e) {
         return map.put(e, PRESENT)==null;
