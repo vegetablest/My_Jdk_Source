@@ -160,6 +160,7 @@ class Thread implements Runnable {
     private boolean     stillborn = false;
 
     /* What will be run. */
+    /**运行的目标业务逻辑*/
     private Runnable target;
 
     /* The group of this thread */
@@ -744,6 +745,7 @@ class Thread implements Runnable {
      */
     @Override
     public void run() {
+        /**开启线程*/
         if (target != null) {
             target.run();
         }

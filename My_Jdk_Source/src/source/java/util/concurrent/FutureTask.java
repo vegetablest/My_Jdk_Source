@@ -89,22 +89,34 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * NEW -> CANCELLED
      * NEW -> INTERRUPTING -> INTERRUPTED
      */
-    private volatile int state;
+    /**当前任务task的状态尚未开始*/
     private static final int NEW          = 0;
+    /**当前任务task稍微结束*/
     private static final int COMPLETING   = 1;
+    /**当前任务task正常结束*/
     private static final int NORMAL       = 2;
+    /**当前任务task执行过程中发生了异常*/
     private static final int EXCEPTIONAL  = 3;
+    /**当前任务task被取消*/
     private static final int CANCELLED    = 4;
+    /**当前任务task的状态中断中*/
     private static final int INTERRUPTING = 5;
+    /**当前任务task的已中断*/
     private static final int INTERRUPTED  = 6;
+    /**当前任务task的状态*/
+    private volatile int state;
 
     /** The underlying callable; nulled out after running */
+    /**Runnable使用装饰者模式伪装成callable*/
     private Callable<V> callable;
     /** The result to return or exception to throw from get() */
+    /** 任务正常执行结束，outcome保存保存结果，非正常情况这里保存异常*/
     private Object outcome; // non-volatile, protected by state reads/writes
     /** The thread running the callable; CASed during run() */
+    /** 保存当前执行任务的线程对象引用*/
     private volatile Thread runner;
     /** Treiber stack of waiting threads */
+    /** 会有很多线程去get当前线程的运行结果，所以这里使用一种数据结构，stack头插头取*/
     private volatile WaitNode waiters;
 
     /**
@@ -129,6 +141,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * @param  callable the callable task
      * @throws NullPointerException if the callable is null
      */
+    /**传callable，直接就算callable*/
     public FutureTask(Callable<V> callable) {
         if (callable == null)
             throw new NullPointerException();
@@ -148,7 +161,9 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * {@code Future<?> f = new FutureTask<Void>(runnable, null)}
      * @throws NullPointerException if the runnable is null
      */
+    /**传runnable调方法，进去是适配器模式转成callable*/
     public FutureTask(Runnable runnable, V result) {
+        /**进去发现里边调别的方法方法，再进去就算实现了callable方法，call方法里边调用run方法*/
         this.callable = Executors.callable(runnable, result);
         this.state = NEW;       // ensure visibility of callable
     }
@@ -186,8 +201,11 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * @throws CancellationException {@inheritDoc}
      */
     public V get() throws InterruptedException, ExecutionException {
+        /**获取当前任务状态*/
         int s = state;
+        /**条件成立：未执行、正在执行的、正完成的。注意：此时调用get的外部线程会阻塞在这里*/
         if (s <= COMPLETING)
+            /**阻塞方法*/
             s = awaitDone(false, 0L);
         return report(s);
     }
@@ -227,6 +245,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * @param v the value
      */
     protected void set(V v) {
+        /**使用CAS将状态设为完成中，但是也有可能set CAS之前将task改成取消了*/
         if (UNSAFE.compareAndSwapInt(this, stateOffset, NEW, COMPLETING)) {
             outcome = v;
             UNSAFE.putOrderedInt(this, stateOffset, NORMAL); // final state
@@ -252,17 +271,22 @@ public class FutureTask<V> implements RunnableFuture<V> {
         }
     }
 
+    /**submit(runnable/callable)-->newTaskFor(runnable) -->execute(task) -->pool*/
+    /**执行入口*/
     public void run() {
+        /**不是new,说明被执行过了，直接结束*/
         if (state != NEW ||
             !UNSAFE.compareAndSwapObject(this, runnerOffset,
                                          null, Thread.currentThread()))
             return;
         try {
+            /**自己写的callable或者runnable被装饰之后就算这个*/
             Callable<V> c = callable;
             if (c != null && state == NEW) {
                 V result;
                 boolean ran;
                 try {
+                    /**真正执行*/
                     result = c.call();
                     ran = true;
                 } catch (Throwable ex) {
@@ -271,6 +295,7 @@ public class FutureTask<V> implements RunnableFuture<V> {
                     setException(ex);
                 }
                 if (ran)
+                    /**设置状态是完成的*/
                     set(result);
             }
         } finally {
@@ -393,11 +418,16 @@ public class FutureTask<V> implements RunnableFuture<V> {
      * @param nanos time to wait, if timed
      * @return state upon completion
      */
+    /**一个是带超时时间的，一个是不带超时时间的*/
     private int awaitDone(boolean timed, long nanos)
         throws InterruptedException {
+        /**不带超时*/
         final long deadline = timed ? System.nanoTime() + nanos : 0L;
+        /**引用当前线程，并封装成waitnode对象*/
         WaitNode q = null;
+        /**表示当前方式是否入队/压栈*/
         boolean queued = false;
+        /**自旋*/
         for (;;) {
             if (Thread.interrupted()) {
                 removeWaiter(q);
@@ -412,9 +442,12 @@ public class FutureTask<V> implements RunnableFuture<V> {
             }
             else if (s == COMPLETING) // cannot time out yet
                 Thread.yield();
+            /**条件成立，第一次自旋，当前线程还未创建waitnode对象，此时创建waitnode对象*/
             else if (q == null)
                 q = new WaitNode();
+            /**第二次自旋，创建了waitnode对象，但是waitnode对象还没有入队*/
             else if (!queued)
+                /**CAS设置waiters对象指向当前waitnode节点*/
                 queued = UNSAFE.compareAndSwapObject(this, waitersOffset,
                                                      q.next = waiters, q);
             else if (timed) {

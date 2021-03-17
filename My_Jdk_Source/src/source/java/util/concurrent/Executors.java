@@ -401,9 +401,11 @@ public class Executors {
      * @return a callable object
      * @throws NullPointerException if task null
      */
+    /**适配器模式*/
     public static <T> Callable<T> callable(Runnable task, T result) {
         if (task == null)
             throw new NullPointerException();
+        /**进去*/
         return new RunnableAdapter<T>(task, result);
     }
 
@@ -499,6 +501,7 @@ public class Executors {
 
     /**
      * A callable that runs given task and returns given result
+     * 实现了callable，call方法里边调用run方法
      */
     static final class RunnableAdapter<T> implements Callable<T> {
         final Runnable task;
