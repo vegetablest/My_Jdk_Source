@@ -5,6 +5,16 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 /**
+ * 数组长度必须指定，一旦指定不能更改，必须保存同一类型的元素，
+ * 增删元素比较麻烦，灵活性比较差，api较少
+ * String[] strs = new String[5];
+ * 增：strs[0] = "haha";
+ * 扩：String strs2 = new String[strs.length + 1];
+ * for(strs) copy strs2
+ *
+ *
+ * 集合：能够动态的保存任意多个对象，方法较多，使用方便代码简洁 add remove set  get ……
+ *
  * 利用反射获取list的容量，通过几种情况测试得到list大小，发现初始化，容量长度特点，进入源码进行探究
  */
 public class TestArrayList01 {

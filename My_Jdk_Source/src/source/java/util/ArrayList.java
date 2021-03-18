@@ -718,6 +718,7 @@ public class ArrayList<E> extends AbstractList<E>
      *
      * @return an iterator over the elements in this list in proper sequence
      */
+    /**获取迭代器*/
     public Iterator<E> iterator() {
         return new Itr();
     }
@@ -726,38 +727,52 @@ public class ArrayList<E> extends AbstractList<E>
      * An optimized version of AbstractList.Itr
      */
     private class Itr implements Iterator<E> {
+        /**下一个要返回元素的索引*/
         int cursor;       // index of next element to return
+        /**返回最后一个元素的索引，如果没有则返回-1*/
         int lastRet = -1; // index of last element returned; -1 if no such
         int expectedModCount = modCount;
 
         Itr() {}
-
+        /**判断是否有下一个元素，cursor等于size的时候说明没了，每次执行next方法，cursor会加1*/
         public boolean hasNext() {
             return cursor != size;
         }
 
         @SuppressWarnings("unchecked")
         public E next() {
+            /**检查操作次数*/
             checkForComodification();
+            /**下一个要返回元素的索引，初始是0*/
             int i = cursor;
+            /**超过索引，抛出异常*/
             if (i >= size)
                 throw new NoSuchElementException();
+            /**获取list元素数组*/
             Object[] elementData = ArrayList.this.elementData;
+            /**超过索引，抛出异常*/
             if (i >= elementData.length)
                 throw new ConcurrentModificationException();
+            /**取数之前先将游标下移一次*/
             cursor = i + 1;
+            /**返回元素*/
             return (E) elementData[lastRet = i];
         }
 
         public void remove() {
+            /**先判断是否小于0*/
             if (lastRet < 0)
                 throw new IllegalStateException();
+            /**检查有标位置*/
             checkForComodification();
 
             try {
+                /**删除一个元素*/
                 ArrayList.this.remove(lastRet);
+                /**游标调整回去*/
                 cursor = lastRet;
                 lastRet = -1;
+                /**操作次数调整*/
                 expectedModCount = modCount;
             } catch (IndexOutOfBoundsException ex) {
                 throw new ConcurrentModificationException();
@@ -787,6 +802,7 @@ public class ArrayList<E> extends AbstractList<E>
         }
 
         final void checkForComodification() {
+            /**操作次数和预期的操作数不一样会抛出异常，初始都是0*/
             if (modCount != expectedModCount)
                 throw new ConcurrentModificationException();
         }
