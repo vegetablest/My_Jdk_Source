@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsfit.suaf.mapper.CourseMapper">
+    <!--开启二级缓存-->
+    <cache type="com.bsfit.suaf.cache.RedisCache"/>
+    <!--关联缓存处理，无敌无敌-->
+<!--    <cache-ref namespace="com.bsfit.suaf.mapper.ScoreMapper"/>-->
+    <select id="getFindAll" resultType="Course">
+        select c_id,c_name,t_id from course;
+    </select>
+    <select id="findById" resultType="Course">
+        select c_id,c_name,t_id from course where c_id = #{id};
+    </select>
+    <delete id="deleteById" >
+        delete from course where c_id = #{id};
+    </delete>
+
+
+</mapper>

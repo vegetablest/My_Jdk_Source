@@ -1,0 +1,21 @@
+spring:
+  redis:
+    password: root
+    cluster:
+      nodes: 192.168.2.10:6379,192.168.2.10:6380,192.168.2.11:6379,192.168.2.11:6380,192.168.2.12:6379,192.168.2.12:6380
+  datasource:
+    type: com.alibaba.druid.pool.DruidDataSource
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sqltest?serverTimezone=Asia/Shanghai&useSSL=false&zeroDateTimeBehavior=convertToNull&useLegacyDatetimeCode=false
+    username: root
+    password: root
+server:
+  port: 8080
+mybatis:
+  type-aliases-package: com.bsfit.suaf.pojo
+  mapper-locations: classpath:com/bsfit/suaf/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#  configuration:
+#    map-underscore-to-camel-case: true
+logging.level.com.bsfit.suaf.mapper: DEBUG
