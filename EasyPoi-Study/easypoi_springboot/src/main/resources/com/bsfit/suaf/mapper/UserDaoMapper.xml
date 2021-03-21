@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.bsfit.suaf.dao.UserDao">
+
+    <select id="findAll" resultType="User">
+        select  id,name,bir,habbys,no,photo,address from t_user;
+    </select>
+    <insert id="addUser" parameterType="User" useGeneratedKeys="true" keyProperty="id">
+        insert into t_user(id,name,bir,habbys,no,photo,address)values(#{id},#{name},#{bir},#{habbys},#{no},#{photo},#{address}) ;
+    </insert>
+</mapper>
