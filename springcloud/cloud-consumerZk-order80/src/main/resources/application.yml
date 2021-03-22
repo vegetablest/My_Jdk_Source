@@ -1,0 +1,13 @@
+server:
+  port: 80
+
+#入住注册中心的服务名
+spring:
+  application:
+    name: cloud-consumer-service
+
+  #配置zookeeper
+  cloud:
+    zookeeper:
+      #zookeeper的IP+端口号
+      connect-string: 192.168.229.130:2181

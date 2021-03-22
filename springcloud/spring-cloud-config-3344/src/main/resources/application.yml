@@ -1,0 +1,21 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: cloud-config-center
+  cloud:
+    config:
+      server:
+        git:
+          #GitHub上仓库的名字
+          uri: https://github.com/vegetablest/spring-cloud-config.git
+          #搜索目录
+          search-paths:
+            - spring-cloud-config
+          #读取分支
+          label: master
+#注册到eureka
+eureka:
+  client:
+    service-url:
+      defaultZone: http://eureka7001.com:7001/eureka/
