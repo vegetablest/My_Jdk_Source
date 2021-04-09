@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysj.logistics.manage.mapper.UserMapper">
+  <resultMap id="BaseResultMap" type="com.bysj.logistics.manage.pojo.User">
+    <id column="USERNAME" jdbcType="VARCHAR" property="username" />
+    <result column="GROUP_NAME" jdbcType="INTEGER" property="groupName" />
+    <result column="PASSWORD" jdbcType="VARCHAR" property="password" />
+    <result column="GENDER" jdbcType="INTEGER" property="gender" />
+    <result column="REALNAME" jdbcType="VARCHAR" property="realname" />
+    <result column="DEPARTMENT" jdbcType="VARCHAR" property="department" />
+    <result column="EMAIL" jdbcType="VARCHAR" property="email" />
+    <result column="PHONE_NO" jdbcType="VARCHAR" property="phoneNo" />
+    <result column="AVATAR" jdbcType="VARCHAR" property="avatar" />
+    <result column="CREATE_TIME" jdbcType="TIMESTAMP" property="createTime" />
+    <result column="UPDATE_TIME" jdbcType="TIMESTAMP" property="updateTime" />
+    <result column="LAST_PASSWORD_TIME" jdbcType="TIMESTAMP" property="lastPasswordTime" />
+    <result column="ISDELETE" jdbcType="TINYINT" property="isdelete" />
+  </resultMap>
+  <sql id="Base_Column_List">
+    USERNAME, GROUP_NAME, PASSWORD, GENDER, REALNAME, DEPARTMENT, EMAIL, PHONE_NO, AVATAR,
+    CREATE_TIME, UPDATE_TIME, LAST_PASSWORD_TIME, ISDELETE
+  </sql>
+  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from user
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+    delete from user
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.bysj.logistics.manage.pojo.User">
+    insert into user (USERNAME, GROUP_NAME, PASSWORD,
+      GENDER, REALNAME, DEPARTMENT,
+      EMAIL, PHONE_NO, AVATAR,
+      CREATE_TIME, UPDATE_TIME, LAST_PASSWORD_TIME,
+      ISDELETE)
+    values (#{username,jdbcType=VARCHAR}, #{groupName,jdbcType=INTEGER}, #{password,jdbcType=VARCHAR},
+      #{gender,jdbcType=INTEGER}, #{realname,jdbcType=VARCHAR}, #{department,jdbcType=VARCHAR},
+      #{email,jdbcType=VARCHAR}, #{phoneNo,jdbcType=VARCHAR}, #{avatar,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, #{lastPasswordTime,jdbcType=TIMESTAMP},
+      #{isdelete,jdbcType=TINYINT})
+  </insert>
+  <insert id="insertSelective" parameterType="com.bysj.logistics.manage.pojo.User">
+    insert into user
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        USERNAME,
+      </if>
+      <if test="groupName != null">
+        GROUP_NAME,
+      </if>
+      <if test="password != null">
+        PASSWORD,
+      </if>
+      <if test="gender != null">
+        GENDER,
+      </if>
+      <if test="realname != null">
+        REALNAME,
+      </if>
+      <if test="department != null">
+        DEPARTMENT,
+      </if>
+      <if test="email != null">
+        EMAIL,
+      </if>
+      <if test="phoneNo != null">
+        PHONE_NO,
+      </if>
+      <if test="avatar != null">
+        AVATAR,
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME,
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME,
+      </if>
+      <if test="lastPasswordTime != null">
+        LAST_PASSWORD_TIME,
+      </if>
+      <if test="isdelete != null">
+        ISDELETE,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="username != null">
+        #{username,jdbcType=VARCHAR},
+      </if>
+      <if test="groupName != null">
+        #{groupName,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null">
+        #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null">
+        #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPasswordTime != null">
+        #{lastPasswordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        #{isdelete,jdbcType=TINYINT},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.bysj.logistics.manage.pojo.User">
+    update user
+    <set>
+      <if test="groupName != null">
+        GROUP_NAME = #{groupName,jdbcType=INTEGER},
+      </if>
+      <if test="password != null">
+        PASSWORD = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null">
+        GENDER = #{gender,jdbcType=INTEGER},
+      </if>
+      <if test="realname != null">
+        REALNAME = #{realname,jdbcType=VARCHAR},
+      </if>
+      <if test="department != null">
+        DEPARTMENT = #{department,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null">
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+      <if test="phoneNo != null">
+        PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      </if>
+      <if test="avatar != null">
+        AVATAR = #{avatar,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null">
+        CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null">
+        UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="lastPasswordTime != null">
+        LAST_PASSWORD_TIME = #{lastPasswordTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="isdelete != null">
+        ISDELETE = #{isdelete,jdbcType=TINYINT},
+      </if>
+    </set>
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.bysj.logistics.manage.pojo.User">
+    update user
+    set GROUP_NAME = #{groupName,jdbcType=INTEGER},
+      PASSWORD = #{password,jdbcType=VARCHAR},
+      GENDER = #{gender,jdbcType=INTEGER},
+      REALNAME = #{realname,jdbcType=VARCHAR},
+      DEPARTMENT = #{department,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR},
+      PHONE_NO = #{phoneNo,jdbcType=VARCHAR},
+      AVATAR = #{avatar,jdbcType=VARCHAR},
+      CREATE_TIME = #{createTime,jdbcType=TIMESTAMP},
+      UPDATE_TIME = #{updateTime,jdbcType=TIMESTAMP},
+      LAST_PASSWORD_TIME = #{lastPasswordTime,jdbcType=TIMESTAMP},
+      ISDELETE = #{isdelete,jdbcType=TINYINT}
+    where USERNAME = #{username,jdbcType=VARCHAR}
+  </update>
+</mapper>

@@ -1,0 +1,315 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--资源定位-->
+<!DOCTYPE generatorConfiguration
+        PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+    <!--id随便写-->
+    <context id="frms-mgr" targetRuntime="MyBatis3">
+        <plugin type="org.mybatis.generator.plugins.EqualsHashCodePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <plugin type="org.mybatis.generator.plugins.CaseInsensitiveLikePlugin"/>
+        <!-- <plugin type="org.mybatis.generator.plugins.MapperConfigPlugin"> <property name="targetPackage" value="mybatis"
+          /> <property name="targetProject" value="../rtms-orm/src/main/resources" /> </plugin> -->
+        <commentGenerator>
+            <property name="suppressDate" value="true"/>
+            <!--去掉注释-->
+            <property name="suppressAllComments" value="true"/>
+        </commentGenerator>
+        <!--jdbc连接驱动-->
+        <jdbcConnection driverClass="com.mysql.cj.jdbc.Driver"
+                        connectionURL="jdbc:mysql://127.0.0.1:3306/mytest?characterEncoding=utf8&amp;useSSL=false&amp;serverTimezone=Asia/Shanghai&amp;rewriteBatchedStatements=true"
+                        userId="root" password="root">
+            <property name="nullCatalogMeansCurrent" value="true"/>
+        </jdbcConnection>
+        <!--默认false，把jdbc里的decimal和number类型解析为integer
+          为true的时候，把这些类型转化为java.math.BigDecimal-->
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+        <!--放pojo的位置-->
+        <javaModelGenerator targetPackage="com.bysj.logistics.manage.pojo" targetProject="./src/main/java">
+            <!--是否以schema作为包的后缀-->
+            <property name="enableSubPackages" value="true"/>
+            <!--自动去除前后空格-->
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+        <!--xml映射文件放的位置-->
+        <sqlMapGenerator targetPackage="com.bysj.logistics.manage.mapper" targetProject="./src/main/resources">
+            <!--是否以schema作为包的后缀-->
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+        <!--各种xml文件生成，固定，包位置能改-->
+        <javaClientGenerator type="XMLMAPPER" targetPackage="com.bysj.logistics.manage.mapper"
+                             targetProject="./src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+        <!-- <table schema="frms" tableName="CHANGE_SET" delimitAllColumns="true"> <property name="useActualColumnNames" value="false"
+          /> <property name="constructorBased" value="true" /> <property name="ignoreQualifiersAtRuntime" value="true" /> <generatedKey
+          column="ID" sqlStatement="SELECT CHANGE_SET_SEQ.currval from dual" identity="true" /> </table> -->
+        <!---->
+        <!--默认生成的库名，表名，对应类名,增删改查方法不以ByExample结尾-->
+        <table schema="mytest" tableName="menulist" domainObjectName="MenuList"
+            enableCountByExample="false"
+            enableSelectByExample="fasle"
+            enableUpdateByExample="false"
+            enableDeleteByExample="false">
+        </table>
+        <!--  <table schema="frms" tableName="RISKS" domainObjectName="Risks">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT RISKS_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="ROLE" domainObjectName="Role">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT ROLE_SEQ.currval
+            from dual" identity="true" />
+            <columnOverride column="PERMISSION" javaType="Long" />
+          </table>
+          <table schema="frms" tableName="USERS" domainObjectName="User">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT USER_SEQ.currval
+            from dual" identity="true" />
+            <columnOverride column="PERMISSION" javaType="Long" />
+          </table>
+          <table schema="frms" tableName="RISK_LEVEL" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT RISK_LEVEL_SEQ.currval
+            from dual" identity="true" />
+          </table>
+          <table schema="rams" tableName="AUDIT_OBJECT">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_AUDIT_OBJECT_ID.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="CACHE_ITEM">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_CACHE_ITEM_ID.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="RISK_TYPE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT RISK_TYPE_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="NAME_LIST" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT NAME_LIST_SEQ.currval
+            from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="MONITOR_NODE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT MONITOR_NODE_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="LIMIT_CONTROL" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT LIMIT_CONTROL_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="MAP_RISK_RISKTYPE">
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table schema="frms" tableName="BIZ_TYPE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT BIZ_TYPE_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="NOTIFY_TYPE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_NOTIFY_TYPE_ID.currval
+            from dual"
+              identity="true" />
+          </table>
+          <table schema="frms" tableName="VERIFY_TYPE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_VERIFY_TYPE_ID.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="CONDITION_POLICY" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_CONDITION_POLICY_ID.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="TRANS_LOG" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT
+            TRANS_LOG_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="DIMENSION" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_DIMENSION_ID.currval from dual" identity="true" />
+          </table>
+          <table schema="frms" tableName="RISK_CUSTOMER" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="CUSTOMER_ID" sqlStatement="SELECT RISK_CUSTOMER_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="frms" tableName="FRMS_STATISTICS" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table schema="" tableName="RISK_CUSTOMER_LEVEL" delimitAllColumns="true">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT
+            RISK_CUSTOMER_LEVEL_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="SECURITY_POLICY" delimitAllColumns="true">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT SEQ_SECURITY_POLICY_ID.currval
+            from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="PUNISH_TYPE" delimitAllColumns="true">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT PUNISH_TYPE_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="" tableName="CONTROL_RECORD" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="CONTROL_ID" sqlStatement="SELECT CONTROL_RECORD_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="CONTROL_SERIAL" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="CONTROL_SERIAL" sqlStatement="SELECT
+            CONTROL_SERIAL_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="QUERY_TYPE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT QUERY_TYPE_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="" tableName="OBJECTS_MAPPING" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT OBJECTS_MAPPING_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="" tableName="RISK_JUDGE_SETTING" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT RISK_JUDGE_SEQ.currval
+            from dual" identity="true" />
+          </table>
+          <table schema="" tableName="CASE_JUDGE_SETTING" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT CASE_JUDGE_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="" tableName="RISK_CASE_JUDGE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table schema="" tableName="AML_MESSAGE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT AML_MESSAGE_SEQ.currval
+            from dual" identity="true" />
+          </table>
+          <table schema="" tableName="AML_DATA_PACKET" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT
+            AML_DATA_PACKET_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="AML_BATCH_NO" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table schema="" tableName="AML_ANNEX" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT AML_ANNEX_SEQ.currval from
+            dual" identity="true" />
+          </table>
+          <table schema="" tableName="AML_RECEIPT" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT
+            AML_RECEIPT_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="" tableName="AML_REPORT" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="REPORT_ID" sqlStatement="SELECT AML_REPORT_SEQ.currval from dual" identity="true" />
+          </table>
+          <table schema="" tableName="AML_REPORT_BODY" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="REPORT_BODY_ID" sqlStatement="SELECT AML_REPORT_BODY_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="AML_REPORT_TRADE" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="REPORT_TRADE_ID" sqlStatement="SELECT
+            AML_REPORT_TRADE_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="AML_RECEIPT_PACKET" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="REPORT_TRADE_ID" sqlStatement="SELECT AML_REPORT_TRADE_SEQ.currval from dual"
+              identity="true" />
+          </table>
+          <table schema="" tableName="AML_OPER_LOG" delimitAllColumns="true">
+            <property name="useActualColumnNames" value="false" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT AML_OPER_LOG_SEQ.currval
+            from dual" identity="true" />
+          </table>
+          <table tableName="GROUP_AUTHORITIES" domainObjectName="GroupAuthority">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table tableName="USER_GROUPS" domainObjectName="UserGroup">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table tableName="AUTHORITIES" schema="RAMS_USER" domainObjectName="Authority">
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+          </table>
+          <table tableName="USERS" schema="rams_test" domainObjectName="User">
+            <property name="useActualColumnNames" value="false" />
+            <property name="constructorBased" value="true" />
+            <property name="ignoreQualifiersAtRuntime" value="true" />
+            <generatedKey column="ID" sqlStatement="SELECT USER_SEQ.currval from dual" identity="true" />
+          </table> -->
+    </context>
+</generatorConfiguration> 

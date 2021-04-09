@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.bysj.logistics.manage.mapper.MenuListMapper">
+
+  <resultMap id="BaseResultMap" type="com.bysj.logistics.manage.pojo.MenuList">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="authName" jdbcType="VARCHAR" property="authname" />
+    <result column="description" jdbcType="VARCHAR" property="description" />
+    <result column="children" jdbcType="VARCHAR" property="children" typeHandler="com.bysj.logistics.manage.handle.ListToVarcharTypeHandler"/>
+  </resultMap>
+
+  <sql id="Base_Column_List">
+    id, authName, description, children
+  </sql>
+
+  <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+    select 
+    <include refid="Base_Column_List" />
+    from menulist
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+    delete from menulist
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+
+  <insert id="insert" parameterType="com.bysj.logistics.manage.pojo.MenuList">
+    insert into menulist (id, authName, description, 
+      children)
+    values (#{id,jdbcType=BIGINT}, #{authname,jdbcType=VARCHAR}, #{description,jdbcType=VARCHAR}, 
+      #{children,jdbcType=VARCHAR,typeHandler=com.bysj.logistics.manage.handle.ListToVarcharTypeHandler})
+  </insert>
+
+  <insert id="insertSelective" parameterType="com.bysj.logistics.manage.pojo.MenuList">
+    insert into menulist
+    <trim prefix="(" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        id,
+      </if>
+      <if test="authname != null">
+        authName,
+      </if>
+      <if test="description != null">
+        description,
+      </if>
+      <if test="children != null">
+        children,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides=",">
+      <if test="id != null">
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="authname != null">
+        #{authname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="children != null">
+        #{children,jdbcType=VARCHAR,,typeHandler=com.bysj.logistics.manage.handle.ListToVarcharTypeHandler},
+      </if>
+    </trim>
+  </insert>
+
+  <update id="updateByPrimaryKeySelective" parameterType="com.bysj.logistics.manage.pojo.MenuList">
+    update menulist
+    <set>
+      <if test="authname != null">
+        authName = #{authname,jdbcType=VARCHAR},
+      </if>
+      <if test="description != null">
+        description = #{description,jdbcType=VARCHAR},
+      </if>
+      <if test="children != null">
+        children = #{children,jdbcType=VARCHAR,typeHandler=com.bysj.logistics.manage.handle.ListToVarcharTypeHandler},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <update id="updateByPrimaryKey" parameterType="com.bysj.logistics.manage.pojo.MenuList">
+    update menulist
+    set authName = #{authname,jdbcType=VARCHAR},
+      description = #{description,jdbcType=VARCHAR},
+      children = #{children,jdbcType=VARCHAR,typeHandler=com.bysj.logistics.manage.handle.ListToVarcharTypeHandler}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+
+  <select id="findAll" resultMap="BaseResultMap">
+    select * from menulist
+  </select>
+</mapper>

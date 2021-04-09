@@ -1,0 +1,31 @@
+server:
+  port: 10080
+  session.timeout: 1800
+  servlet:
+    context-path: /manage
+
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    jdbc-url: jdbc:mysql://127.0.0.1:3306/mytest?characterEncoding=utf8&useSSL=false&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
+    username: root
+    password: root
+    connectionTestQuery: SELECT 1 from dual
+    #connectionTestQuery: SELECT 1
+    minimumIdle: 8
+    autoCommit: true
+    maxLifetime: 2000000
+    connectionTimeout: 3000000
+    idleTimeout: 300000
+    maximum-pool-size: 20
+mybatis:
+  type-aliases-package: com.bysj.logistics.manage.pojo
+  mapper-locations: classpath:com/bysj/logistics/manage/mapper/*.xml
+  configuration:
+    map-underscore-to-camel-case: true
+#打印sql
+logging.level.com.bysj.logistics.manage.mapper: DEBUG
+
+
+
+
