@@ -5,6 +5,10 @@ import com.netflix.loadbalancer.RandomRule;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
+/**
+ * 这里不能被@ComponentScan扫描到
+ * @author bangsun
+ */
 @Configuration
 public class MySelfRule {
     @Bean

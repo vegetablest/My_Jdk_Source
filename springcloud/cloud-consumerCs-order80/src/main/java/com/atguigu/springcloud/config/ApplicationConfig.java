@@ -5,9 +5,14 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.web.client.RestTemplate;
 
+/**
+ * @author bangsun
+ */
 @Configuration
 public class ApplicationConfig {
-    //使用此注解，开始RestTemplate负载均衡才行
+    /**
+     * 使用此注解，开始RestTemplate负载均衡才行
+     * */
     @LoadBalanced
     @Bean
     public RestTemplate getRestTemplate(){

@@ -7,11 +7,13 @@ import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.hystrix.EnableHystrix;
 import org.springframework.cloud.openfeign.EnableFeignClients;
 
+/**
+ * 开启hystrix
+ * @author bangsun
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
-//开启openfeign
 @EnableFeignClients
-//开启hystrix
 @EnableHystrix
 public class OrderHystrixMain80 {
     public static void main(String[] args) {

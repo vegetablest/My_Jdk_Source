@@ -8,7 +8,11 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.*;
 
 import javax.annotation.Resource;
+import java.util.concurrent.TimeUnit;
 
+/**
+ * @author bangsun
+ */
 @RestController
 @Slf4j
 public class PaymentController {
@@ -32,7 +36,7 @@ public class PaymentController {
     @GetMapping("/payment/get/{id}")
     public CommonResult getPaymentById(@PathVariable("id") Long id){
         Payment payment = paymentService.getPaymentById(id);
-        log.info("插入结果：" + payment );
+        log.info("查询结果：" + payment );
         if (payment != null){
             return new CommonResult(200,"查询成功,端口号：" + serverPort,payment);
 
@@ -42,6 +46,16 @@ public class PaymentController {
     }
     @GetMapping("/payment/lb")
     public String paymentLB(){
+        return serverPort;
+    }
+
+    @GetMapping("/payment/feign/timeout")
+    public String paymentTimeOut(){
+        try {
+            TimeUnit.SECONDS.sleep(3);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
         return serverPort;
     }
 }

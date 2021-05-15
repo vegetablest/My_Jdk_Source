@@ -5,6 +5,10 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 import java.util.UUID;
+/**
+ * zookeeper 提供者
+ * @author bangsun
+ */
 @RestController
 @Slf4j
 public class PaymentController {

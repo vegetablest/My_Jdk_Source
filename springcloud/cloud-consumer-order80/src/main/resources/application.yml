@@ -13,5 +13,7 @@ eureka:
     #表示是否让eureka注册中心抓取自己信息，单点无所谓，集群必须是true
     fetch-registry: true
     service-url:
-    # defaultZone:  http://localhost:7001/eureka/
+#      defaultZone:  http://localhost:7001/eureka/
       defaultZone:  http://eureka7002.com:7002/eureka/,http://eureka7001.com:7001/eureka/
+  instance:
+    instance-id:  order80

@@ -11,8 +11,8 @@ eureka:
     #设置uereka交互的地址，查询注册的服务
     service-url:
       defaultZone: http://eureka7001.com:7001/eureka/
-      #defaultZone: http://eureka7002.com:7002/eureka/
-# 关闭自我保护机制 ，默认为true，是开启的,下边设置超时心跳时间，默认90秒，现在改为2秒
-# server:
-#   enable-self-preservation: false
-#    eviction-interval-timer-in-ms: 2000
+#      defaultZone: http://eureka7002.com:7002/eureka/
+# 关闭自我保护机制那堆红字，默认为true，是开启的,下边设置超时心跳时间，默认90秒，现在改为2秒
+  server:
+    enable-self-preservation: false
+    eviction-interval-timer-in-ms: 2000

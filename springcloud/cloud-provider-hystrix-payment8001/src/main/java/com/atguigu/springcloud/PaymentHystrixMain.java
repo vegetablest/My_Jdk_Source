@@ -8,6 +8,9 @@ import org.springframework.cloud.client.circuitbreaker.EnableCircuitBreaker;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.context.annotation.Bean;
 
+/**
+ * @author bangsun
+ */
 @SpringBootApplication
 @EnableDiscoveryClient
 @EnableCircuitBreaker

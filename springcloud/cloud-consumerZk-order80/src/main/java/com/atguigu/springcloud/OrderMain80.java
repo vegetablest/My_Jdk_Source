@@ -1,10 +1,13 @@
 package com.atguigu.springcloud;
 
-import org.aspectj.weaver.ast.Or;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 
+/**
+ * 开启服务发现
+ * @author bangsun
+ */
 @EnableDiscoveryClient
 @SpringBootApplication
 public class OrderMain80 {

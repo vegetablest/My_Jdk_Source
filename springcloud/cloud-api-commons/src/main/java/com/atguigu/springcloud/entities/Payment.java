@@ -4,12 +4,16 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.io.Serializable;
+
+/**
+ * 支付模块
+ * @author bangsun
+ */
 @Data
-//全参
 @AllArgsConstructor
-//空参
 @NoArgsConstructor
-public class Payment {  
+public class Payment implements Serializable {
     private Long id;
     private String serial;
 }
