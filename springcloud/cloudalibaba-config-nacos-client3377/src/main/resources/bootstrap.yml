@@ -10,7 +10,7 @@ spring:
       config:
         server-addr: localhost:8848 #Nacos服务注册中心
         file-extension: yaml #指定yaml格式
-        #group: 分组名，默认是默认分组
-        #namespace: 写命名空间的ID，命名空间默认public
-# ${prefix}-${spring.profile.active}.${file-extension}
-# nacos-config-client-dev.yml
+        group:  DEV_GROUP   #分组名，默认是默认分组
+        namespace:  6de06db3-b268-4df1-92bb-c3e635bab93b     #写命名空间的ID，命名空间默认public
+        # ${prefix}-${spring.profile.active}.${file-extension}
+        # nacos-config-client-dev.yaml

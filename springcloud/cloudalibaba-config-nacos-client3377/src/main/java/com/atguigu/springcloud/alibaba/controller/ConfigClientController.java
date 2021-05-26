@@ -5,9 +5,14 @@ import org.springframework.cloud.context.config.annotation.RefreshScope;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+/**
+ * 支持Nacos的动态刷新
+ * @author bangsun
+ */
 @RestController
-@RefreshScope //支持Nacos的动态刷新
+@RefreshScope
 public class ConfigClientController {
+
     @Value("${config.info}")
     private String configInfo;
     @GetMapping("/config/info")

@@ -15,6 +15,7 @@ eureka:
     service-url:
        defaultZone:  http://localhost:7001/eureka/
 #      defaultZone:  http://eureka7002.com:7002/eureka/,http://eureka7001.com:7001/eureka/
+#fegin服务调用方开启服务降级
 feign:
   hystrix:
     enabled: true

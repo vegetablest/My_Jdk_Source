@@ -29,21 +29,22 @@ public class PaymentHystrixController {
     }
 
     @GetMapping("/consumer/payment/hystrix/timeout/{id}")
-//    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutHandler" ,commandProperties = {
-//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds",value = "2000")
+//    @HystrixCommand(fallbackMethod = "paymentInfo_TimeoutHandler", commandProperties = {
+//            @HystrixProperty(name = "execution.isolation.thread.timeoutInMilliseconds", value = "5000")
 //    })
     @HystrixCommand
     public String paymentInfo_Timeout(@PathVariable("id") Integer id) {
-         int age = 10/0;
+//        int age = 10 / 0;
         String result = paymentHystrixService.paymentInfo_Timeout(id);
+        log.info("80");
         return result;
     }
 
     public String paymentInfo_TimeoutHandler(@PathVariable("id") Integer id) {
-        return "这里是80端口，服务提供端异常请稍等：" + id;
+        return "这里是80端口，服务消费方异常，请稍等:" + id;
     }
 
     public String paymentInfo_global_TimeoutHandler() {
-        return "这里是80端口的全局打击，服务提供端异常请稍等：" ;
+        return "这里是80端口的全局打击，服务消费方异常，请稍等:";
     }
 }

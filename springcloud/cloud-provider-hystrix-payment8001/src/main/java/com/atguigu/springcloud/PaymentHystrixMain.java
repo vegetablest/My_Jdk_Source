@@ -18,6 +18,10 @@ public class PaymentHystrixMain {
     public static void main(String[] args) {
         SpringApplication.run(PaymentHystrixMain.class,args);
     }
+
+    /**
+     * 让Hystrix能监控到他
+     * */
     @Bean
     public ServletRegistrationBean getServlet() {
         HystrixMetricsStreamServlet streamServlet = new HystrixMetricsStreamServlet();

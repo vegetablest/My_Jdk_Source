@@ -5,6 +5,10 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.cloud.client.discovery.EnableDiscoveryClient;
 import org.springframework.cloud.netflix.eureka.EnableEurekaClient;
 
+/**
+ * gateWay主启动类
+ * @author bangsun
+ */
 @SpringBootApplication
 @EnableEurekaClient
 public class GateWayMain {
