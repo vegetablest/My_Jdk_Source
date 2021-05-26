@@ -1,0 +1,8 @@
+server:
+  port: 8080
+
+#es配置
+spring:
+  data:
+    elasticsearch:
+      cluster-nodes: 10.100.2.188:9300
