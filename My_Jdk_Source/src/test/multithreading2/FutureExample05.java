@@ -1,8 +1,11 @@
 package test.multithreading2;
 
+import com.sun.xml.internal.ws.util.CompletedFuture;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
+import java.util.function.Supplier;
 
 /**
  * <br>
@@ -11,44 +14,31 @@ import java.util.concurrent.*;
  * @data 2021/3/22 16:10
  * @verson
  */
-public class FutureExample04 {
+public class FutureExample05 {
 
     private static ThreadPoolExecutor threadPool =
             new ThreadPoolExecutor(3, 3,
                     0L, TimeUnit.MILLISECONDS,
                     new LinkedBlockingQueue<Runnable>());
 
-    private static ExecutorService executorService =  Executors.newCachedThreadPool();
-
-    //    static FutureTaskTest futureTaskTest = new FutureTaskTest();
     public static void main(String[] args) {
         ScheduledExecutorService saveDpmScheduledThreadPool = Executors.newScheduledThreadPool(1);
         saveDpmScheduledThreadPool.scheduleWithFixedDelay(() -> {
-            List<Callable<Integer>> tasks = new ArrayList<>(8);
             long l = System.currentTimeMillis();
-            tasks.add(new FutureTaskTest(2));
-            tasks.add(new FutureTaskTest(4));
-            tasks.add(new FutureTaskTest(2));
-            try {
-                System.out.println(threadPool.getPoolSize());
-                List<Future<Integer>> futures = threadPool.invokeAll(tasks);
+            List<CompletedFuture<Integer>> tasks = new ArrayList<>(8);
 
-                System.out.println(threadPool.getPoolSize());
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-
+            System.out.println(threadPool.getPoolSize());
             System.out.println("time:" + (System.currentTimeMillis() - l));
         }, 1, 1, TimeUnit.SECONDS);
     }
 }
 
 
-class FutureTaskTest implements Callable<Integer> {
+class FutureTaskTest5 implements Callable<Integer> {
 
     private int timeout;
 
-    public FutureTaskTest(int timeout) {
+    public FutureTaskTest5(int timeout) {
         this.timeout = timeout;
     }
 
